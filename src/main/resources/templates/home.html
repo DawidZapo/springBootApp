@@ -21,6 +21,13 @@
     </p>
 
     <hr>
+    <div sec:authorize="hasRole('EMPLOYEE')">
+        <p>
+            <a th:href="@{/employees}">
+                Employees
+            </a>
+        </p>
+    </div>
 
     <div sec:authorize="hasRole('MANAGER')">
         <p>

@@ -42,6 +42,7 @@ public class DemoSecurityConfig {
         return http.build();
     }
 
+    // not needed users hard coded
 //    @Bean
 //    public InMemoryUserDetailsManager userDetailsManager() {
 //
