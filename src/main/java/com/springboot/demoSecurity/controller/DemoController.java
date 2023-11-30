@@ -68,4 +68,9 @@ public class DemoController {
     public String showSystems(){
         return "systems";
     }
+
+    @GetMapping("/pageNotFound")
+    public String pageNotFound(){
+        return "error/page-not-found";
+    }
 }

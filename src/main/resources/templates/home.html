@@ -1,53 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org">
+      xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
+    <style>
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h2>
-      Luv2Code Company Home Page
-    </h2>
-
-    <hr>
-    <p>
-        Username: <span sec:authentication="principal.username"></span>
-        <br><br>
-        Roles: <span sec:authentication="principal.authorities"></span>
-    </p>
-
-    <hr>
-    <div sec:authorize="hasRole('EMPLOYEE')">
-        <p>
-            <a th:href="@{/employees}">
-                Employees
-            </a>
-        </p>
+<div class="container">
+    <div class="header">
+        <h2>Home Page</h2>
+        <hr>
     </div>
 
-    <div sec:authorize="hasRole('MANAGER')">
+    <div class="content">
+
+        <div sec:authorize="hasRole('EMPLOYEE')">
+            <p>
+                <a th:href="@{/employees}" class="btn btn-primary w-25">Employees</a>
+            </p>
+        </div>
+
+        <div sec:authorize="hasRole('MANAGER')">
+            <p>
+                <a th:href="@{/leaders}" class="btn btn-primary w-25">Leadership</a>
+            </p>
+        </div>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <p>
+                <a th:href="@{/systems}" class="btn btn-primary w-25">Systems</a>
+            </p>
+        </div>
+
+        <hr>
         <p>
-            <a th:href="@{/leaders}">
-                Leadership
-            </a>
+            Username: <span sec:authentication="principal.username"></span>
         </p>
-    </div>
-    <div sec:authorize="hasRole('ADMIN')">
-        <p>
-            <a th:href="@{/systems}">
-                Systems
-            </a>
-        </p>
+        <div>
+            <p sec:authorize="hasRole('EMPLOYEE')">
+                <span class="badge bg-success">Employee</span>
+            </p>
+            <p sec:authorize="hasRole('MANAGER')">
+                <span class="badge bg-primary">Manager</span>
+            </p>
+            <p sec:authorize="hasRole('ADMIN')">
+                <span class="badge bg-danger">Admin</span>
+            </p>
+        </div>
     </div>
 
-    <hr>
-    Welcome to home page
-    <form action="#" th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout" class="btn btn-outline-danger">
-    </form>
+    <div class="footer">
+        <form action="#" th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout" class="btn btn-outline-danger">
+        </form>
+    </div>
+</div>
 </body>
 </html>

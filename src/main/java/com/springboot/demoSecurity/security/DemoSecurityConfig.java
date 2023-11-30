@@ -30,6 +30,8 @@ public class DemoSecurityConfig {
                                 .requestMatchers("/").hasRole("EMPLOYEE")
                                 .requestMatchers("/leaders/**").hasRole("MANAGER")
                                 .requestMatchers("/systems/**").hasRole("ADMIN")
+                                .requestMatchers("/employees/showFormForAdd").hasRole("MANAGER")
+                                .requestMatchers("/employees/showFormForUpdate").hasRole("MANAGER")
                                 .anyRequest().authenticated())
                 .formLogin(form -> form
                                 .loginPage("/showMyLoginPage")
